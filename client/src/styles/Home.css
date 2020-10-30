@@ -1,8 +1,12 @@
 .Home {
+  display: flex;
+  flex-direction: column;
+}
+.home-header-card {
   width: 100%;
   min-height: 500px;
-  background: rgba(219, 233, 240, .6);
-  background-image: url('../images/Circle.svg');
+  background: rgba(219, 233, 240, 0.6);
+  background-image: url("../images/Circle.svg");
   background-repeat: no-repeat;
   background-position: -100px 100px;
   background-size: 50%;
@@ -46,4 +50,12 @@
 }
 .home-second-text {
   font-size: 18px;
+}
+
+.home-item-cards {
+  width: 100%;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
 }

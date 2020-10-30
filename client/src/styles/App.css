@@ -1,5 +1,8 @@
 @import "./Nav.css";
 @import "./Home.css";
+@import "./ItemCard.css";
+@import "./Footer.css";
+@import "./customScroll.css";
 
 body {
   font-family: 'Roboto', sans-serif;
@@ -20,7 +23,9 @@ body {
 	margin: 0 auto;
 }
 
-
+.home-item-cards {
+  margin-top: 50px;
+}
 
 
 .Home, .Cart, .Catalog {
