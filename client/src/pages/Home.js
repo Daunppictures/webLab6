@@ -1,19 +1,19 @@
 import "../styles/App.css";
-import React, { useState, useEffect } from "react";
+import React, { useEffect } from "react";
 import ItemCard from "../Components/ItemCard";
+import LoadingBox from "../Components/LoadingBox";
+import MessageBox from "../Components/MessageBox";
+import { useDispatch, useSelector } from "react-redux";
+import { listProducts } from "../actions/productAction";
 
 function Home() {
-  const [data, setData] = useState([]);
+  const dispatch = useDispatch();
+  const productList = useSelector((state) => state.productList);
+  const { loading, error, products } = productList;
 
   useEffect(() => {
-    getResponse();
+    dispatch(listProducts());
   }, []);
-
-  const getResponse = async () => {
-    const response = await fetch("/api/products");
-    const data = await response.json();
-    setData(data);
-  };
 
   return (
     <div className="Home container">
@@ -30,17 +30,29 @@ function Home() {
           </div>
         </div>
       </div>
-      <div className="home-item-cards">
-        {data.map((info, index) => {
-          return (<ItemCard
-              key={index}
-              name={info.name}
-              description={info.description}
-              price={info.price}
-              image={info.image}
-            />);
-        })}
-      </div>
+      {loading ? (
+        <div className="home-loading-item-card">
+          {[...Array(4)].map((x, i) => (
+            <LoadingBox key={i} />
+          ))}
+        </div>
+      ) : error ? (
+        <MessageBox variant="danger">{error}</MessageBox>
+      ) : (
+        <div className="home-item-cards">
+          {products.map((info, index) => {
+            return (
+              <ItemCard
+                key={index}
+                name={info.name}
+                description={info.description}
+                price={info.price}
+                image={info.image}
+              />
+            );
+          })}
+        </div>
+      )}
     </div>
   );
 }
