@@ -5,6 +5,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { listProducts } from "../actions/productAction";
 import LoadingBox from "../Components/LoadingBox";
 import MessageBox from "../Components/MessageBox";
+import LoadingRectangle from "../Components/LoadingRectangle";
 
 function Catalog() {
   const dispatch = useDispatch();
@@ -18,10 +19,13 @@ function Catalog() {
   return (
     <div>
       {loading ? (
-        <div className="home-loading-item-card">
-          {[...Array(4)].map((x, i) => (
-            <LoadingBox key={i} />
-          ))}
+        <div className="container catalog-load-wrapper">
+          <LoadingRectangle height="100px" width="100%" />
+          <div className="catalog-load">
+            {[...Array(6)].map((x, i) => (
+              <LoadingBox className="catalog-load" key={i} />
+            ))}
+          </div>
         </div>
       ) : error ? (
         <MessageBox variant="danger">{error}</MessageBox>
@@ -30,12 +34,7 @@ function Catalog() {
           <div className="catalog-header"></div>
           <div className="catalog-card-wrapper">
             {products.map((info) => {
-              return (
-                <ItemCard
-                  key={info.__id}
-                  product={info}
-                />
-              );
+              return <ItemCard key={info.__id} product={info} />;
             })}
           </div>
         </div>

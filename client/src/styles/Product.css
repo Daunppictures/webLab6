@@ -100,3 +100,11 @@
   justify-content: center;
   align-items: center;
 }
+.product-load {
+  height: 380px;
+  width: 62%;
+  display: flex;
+  flex-direction: row;
+  padding: 235px 0;
+  justify-content: space-between;
+}

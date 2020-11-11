@@ -6,6 +6,10 @@
   flex-direction: column;
   justify-content: space-between;
 }
+.loading-wrapper {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+}
 .home-loading-item-card {
   margin-top: 50px;
   width: 100%;

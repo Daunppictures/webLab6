@@ -3,7 +3,7 @@
   height: 100px;
   background: rgb(245, 245, 245);
   border-radius: 12px;
-  box-shadow: 0 6px 15px rgba(0, 0, 0, .1);
+  box-shadow: 0 6px 15px rgba(143, 102, 102, 0.1);
 }
 .catalog-card-wrapper {
   display: grid;

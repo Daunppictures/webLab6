@@ -3,7 +3,7 @@ import { useDispatch, useSelector } from "react-redux";
 import React, { useEffect } from "react";
 import { Link } from "react-router-dom";
 import arrow from "../images/icons/arrow-left.svg";
-import LoadingBox from "../Components/LoadingBox";
+import LoadingRectangle from "../Components/LoadingRectangle";
 import MessageBox from "../Components/MessageBox";
 import { detailsProduct } from "../actions/productAction";
 
@@ -20,10 +20,9 @@ function Product(props) {
   return (
     <div className="product-wrapper">
       {loading ? (
-        <div className="home-loading-item-card">
-          {[...Array(4)].map((x, i) => (
-            <LoadingBox key={i} />
-          ))}
+        <div className="product-load container">
+          <LoadingRectangle height="100%" width="45%" />
+          <LoadingRectangle height="100%" width="50%" />
         </div>
       ) : error ? (
         <MessageBox variant="danger">{error}</MessageBox>
@@ -46,7 +45,7 @@ function Product(props) {
                 <div className="product-description">{product.description}</div>
               </div>
               <div className="product-footer">
-                <div className="product-price">{product.price}</div>
+                <div className="product-price">{product.price} $</div>
                 <div className="product-price-wrapper">
                   <select className="product-qty">
                     <option value="1">1</option>

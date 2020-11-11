@@ -12,7 +12,7 @@ function ItemCard(props) {
         <div className="catalog-card-title">{product.name}</div>
         <div className="catalog-card-sec-title">{product.description}</div>
         <div className="catalog-card-footer">
-          <div className="catalog-card-price">{product.price}</div>
+          <div className="catalog-card-price">{product.price} $</div>
           <div className="catalog-card-button">Buy</div>
         </div>
       </div>
