@@ -1,6 +1,6 @@
 import "../styles/App.css";
 import React, { useEffect } from "react";
-import ItemCard from "../Components/ItemCard";
+import ItemCardHome from "../Components/ItemCardHome";
 import LoadingBox from "../Components/LoadingBox";
 import MessageBox from "../Components/MessageBox";
 import { useDispatch, useSelector } from "react-redux";
@@ -13,7 +13,7 @@ function Home() {
 
   useEffect(() => {
     dispatch(listProducts());
-  }, []);
+  }, [dispatch]);
 
   return (
     <div className="Home container">
@@ -40,10 +40,11 @@ function Home() {
         <MessageBox variant="danger">{error}</MessageBox>
       ) : (
         <div className="home-item-cards">
-          {products.map((info, index) => {
+          {products.slice(0, 4).map((info, index) => {
             return (
-              <ItemCard
+              <ItemCardHome
                 key={index}
+                id={info.__id}
                 name={info.name}
                 description={info.description}
                 price={info.price}

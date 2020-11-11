@@ -1,238 +1,45 @@
-import '../styles/App.css';
-import axios from 'axios';
-import React, { useState, useEffect } from "react";
-import Card from "../Components/Card";
-import iphone from "../images/cardImages/iphone-12-dark.jpg";
-
+import "../styles/App.css";
+import React, { useEffect } from "react";
+import ItemCard from "../Components/ItemCard";
+import { useDispatch, useSelector } from "react-redux";
+import { listProducts } from "../actions/productAction";
+import LoadingBox from "../Components/LoadingBox";
+import MessageBox from "../Components/MessageBox";
 
 function Catalog() {
-  const [data, setData] = useState([]);
-  
+  const dispatch = useDispatch();
+  const productList = useSelector((state) => state.productList);
+  const { loading, error, products } = productList;
 
   useEffect(() => {
-    const getResponse = async () => {
-        const { data } = await axios.get("/api/hello");
-        setData(data);
-
-    };
-    getResponse();
-  }, []);
-
+    dispatch(listProducts());
+  }, [dispatch]);
 
   return (
-    <div className="Catalog container">
-      <div className="catalog-header">
-        
-      </div>
-      <div className="catalog-card-wrapper">
-        <div className="catalog-card">
-          <div className="catalog-card-header">
-            <img src={iphone} className="catalog-card-img"/>
-          </div>
-          <div className="catalog-card-body">
-            <div className="catalog-card-title">
-              Iphone 12
-            </div>
-            <div className="catalog-card-sec-title">
-              Dark, 128 Gb
-            </div>
-            <div className="catalog-card-footer">
-              <div className="catalog-card-price">
-                700 $
-              </div>
-              <div className="catalog-card-button">
-                Buy
-              </div>
-            </div>
+    <div>
+      {loading ? (
+        <div className="home-loading-item-card">
+          {[...Array(4)].map((x, i) => (
+            <LoadingBox key={i} />
+          ))}
+        </div>
+      ) : error ? (
+        <MessageBox variant="danger">{error}</MessageBox>
+      ) : (
+        <div className="Catalog container">
+          <div className="catalog-header"></div>
+          <div className="catalog-card-wrapper">
+            {products.map((info) => {
+              return (
+                <ItemCard
+                  key={info.__id}
+                  product={info}
+                />
+              );
+            })}
           </div>
         </div>
-        
-        <div className="catalog-card">
-          <div className="catalog-card-header">
-            <img src={iphone} className="catalog-card-img"/>
-          </div>
-          <div className="catalog-card-body">
-            <div className="catalog-card-title">
-              Iphone 12
-            </div>
-            <div className="catalog-card-sec-title">
-              Dark, 128 Gb
-            </div>
-            <div className="catalog-card-footer">
-              <div className="catalog-card-price">
-                700 $
-              </div>
-              <div className="catalog-card-button">
-                Buy
-              </div>
-            </div>
-          </div>
-        </div>
-
-        <div className="catalog-card">
-          <div className="catalog-card-header">
-            <img src={iphone} className="catalog-card-img"/>
-          </div>
-          <div className="catalog-card-body">
-            <div className="catalog-card-title">
-              Iphone 12
-            </div>
-            <div className="catalog-card-sec-title">
-              Dark, 128 Gb
-            </div>
-            <div className="catalog-card-footer">
-              <div className="catalog-card-price">
-                700 $
-              </div>
-              <div className="catalog-card-button">
-                Buy
-              </div>
-            </div>
-          </div>
-        </div>
-
-        <div className="catalog-card">
-          <div className="catalog-card-header">
-            <img src={iphone} className="catalog-card-img"/>
-          </div>
-          <div className="catalog-card-body">
-            <div className="catalog-card-title">
-              Iphone 12
-            </div>
-            <div className="catalog-card-sec-title">
-              Dark, 128 Gb
-            </div>
-            <div className="catalog-card-footer">
-              <div className="catalog-card-price">
-                700 $
-              </div>
-              <div className="catalog-card-button">
-                Buy
-              </div>
-            </div>
-          </div>
-        </div>
-
-        <div className="catalog-card">
-          <div className="catalog-card-header">
-            <img src={iphone} className="catalog-card-img"/>
-          </div>
-          <div className="catalog-card-body">
-            <div className="catalog-card-title">
-              Iphone 12
-            </div>
-            <div className="catalog-card-sec-title">
-              Dark, 128 Gb
-            </div>
-            <div className="catalog-card-footer">
-              <div className="catalog-card-price">
-                700 $
-              </div>
-              <div className="catalog-card-button">
-                Buy
-              </div>
-            </div>
-          </div>
-        </div>
-
-        <div className="catalog-card">
-          <div className="catalog-card-header">
-            <img src={iphone} className="catalog-card-img"/>
-          </div>
-          <div className="catalog-card-body">
-            <div className="catalog-card-title">
-              Iphone 12
-            </div>
-            <div className="catalog-card-sec-title">
-              Dark, 128 Gb
-            </div>
-            <div className="catalog-card-footer">
-              <div className="catalog-card-price">
-                700 $
-              </div>
-              <div className="catalog-card-button">
-                Buy
-              </div>
-            </div>
-          </div>
-        </div>
-
-        <div className="catalog-card">
-          <div className="catalog-card-header">
-            <img src={iphone} className="catalog-card-img"/>
-          </div>
-          <div className="catalog-card-body">
-            <div className="catalog-card-title">
-              Iphone 12
-            </div>
-            <div className="catalog-card-sec-title">
-              Dark, 128 Gb
-            </div>
-            <div className="catalog-card-footer">
-              <div className="catalog-card-price">
-                700 $
-              </div>
-              <div className="catalog-card-button">
-                Buy
-              </div>
-            </div>
-          </div>
-        </div>
-
-        <div className="catalog-card">
-          <div className="catalog-card-header">
-            <img src={iphone} className="catalog-card-img"/>
-          </div>
-          <div className="catalog-card-body">
-            <div className="catalog-card-title">
-              Iphone 12
-            </div>
-            <div className="catalog-card-sec-title">
-              Dark, 128 Gb
-            </div>
-            <div className="catalog-card-footer">
-              <div className="catalog-card-price">
-                700 $
-              </div>
-              <div className="catalog-card-button">
-                Buy
-              </div>
-            </div>
-          </div>
-        </div>
-
-        <div className="catalog-card">
-          <div className="catalog-card-header">
-            <img src={iphone} className="catalog-card-img"/>
-          </div>
-          <div className="catalog-card-body">
-            <div className="catalog-card-title">
-              Iphone 12
-            </div>
-            <div className="catalog-card-sec-title">
-              Dark, 128 Gb
-            </div>
-            <div className="catalog-card-footer">
-              <div className="catalog-card-price">
-                700 $
-              </div>
-              <div className="catalog-card-button">
-                Buy
-              </div>
-            </div>
-          </div>
-        </div>
-        
-      </div>
-      {data.map((info, index) => {
-        return (<Card
-          key={index}
-          infoId={info.id}
-          firstName={info.firstName}
-          lastName={info.lastName}
-        />);
-        
-      })}
+      )}
     </div>
   );
 }
