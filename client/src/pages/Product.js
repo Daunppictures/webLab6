@@ -1,6 +1,6 @@
 import "../styles/App.css";
 import { useDispatch, useSelector } from "react-redux";
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import arrow from "../images/icons/arrow-left.svg";
 import LoadingRectangle from "../Components/LoadingRectangle";
@@ -10,13 +10,16 @@ import { detailsProduct } from "../actions/productAction";
 function Product(props) {
   const dispatch = useDispatch();
   const productId = props.match.params.id;
+  const [qty, setQty] = useState(1);
   const productDetails = useSelector((state) => state.productDetails);
   const { loading, error, product } = productDetails;
 
   useEffect(() => {
     dispatch(detailsProduct(productId));
   }, [dispatch, productId]);
-
+  const addToCartHandler = () => {
+    props.history.push(`/cart/${productId}?qty=${qty}`);
+  };
   return (
     <div className="product-wrapper">
       {loading ? (
@@ -47,12 +50,27 @@ function Product(props) {
               <div className="product-footer">
                 <div className="product-price">{product.price} $</div>
                 <div className="product-price-wrapper">
-                  <select className="product-qty">
-                    <option value="1">1</option>
-                    <option value="2">2</option>
-                    <option value="3">3</option>
-                  </select>
-                  <button className="product-buy-button">Add to Cart</button>
+                  {product.countInStock > 0 && (
+                    <>
+                      <select
+                        value={qty}
+                        onChange={(e) => setQty(e.target.value)}
+                        className="product-qty"
+                      >
+                        {[...Array(product.countInStock).keys()].map((x) => (
+                          <option key={x + 1} value={x + 1}>
+                            {x + 1}
+                          </option>
+                        ))}
+                      </select>
+                      <button
+                        onClick={addToCartHandler}
+                        className="product-buy-button"
+                      >
+                        Add to Cart
+                      </button>
+                    </>
+                  )}
                 </div>
               </div>
             </div>

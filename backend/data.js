@@ -2,6 +2,7 @@ const data = {
   products: [
     {
       __id: '1',
+      countInStock: 10,
       name: "Iphone 12",
       description: "Black, 128 Gb",
       price: 700,
@@ -10,6 +11,7 @@ const data = {
     },
     {
       __id: '2',
+      countInStock: 10,
       name: "Iphone 12",
       description: "Blue, 128 Gb",
       price: 700,
@@ -18,6 +20,7 @@ const data = {
     },
     {
       __id: '3',
+      countInStock: 10,
       name: "Iphone 12",
       description: "Green, 128 Gb",
       price: 700,
@@ -26,6 +29,7 @@ const data = {
     },
     {
       __id: '4',
+      countInStock: 10,
       name: "Iphone 12",
       description: "White, 128 Gb",
       price: 700,
@@ -34,6 +38,7 @@ const data = {
     },
     {
       __id: '5',
+      countInStock: 10,
       name: "Iphone 11",
       description: "Black, 128 Gb",
       price: 600,
@@ -42,6 +47,7 @@ const data = {
     },
     {
       __id: '6',
+      countInStock: 10,
       name: "Iphone 11",
       description: "Green, 128 Gb",
       price: 600,

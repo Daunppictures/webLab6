@@ -1,10 +1,17 @@
-import '../styles/App.css';
-import React from 'react';
+import "../styles/App.css";
+import React from "react";
 
-function Cart() {
+function Cart(props) {
+  const productId = props.match.params.id;
+  const qty = props.location.search
+    ? Number(props.location.search.split("=")[1])
+    : 1;
   return (
     <div className="Cart container">
-      Cart
+      <h1>Cart Screen</h1>
+      <p>
+        ADD TO CART : ProductID: {productId} Qty: {qty}
+      </p>
     </div>
   );
 }
