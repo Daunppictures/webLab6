@@ -1,12 +1,21 @@
 import "../styles/App.css";
+import { Link } from "react-router-dom";
 import React from "react";
 
 function ItemCard(props) {
-  const {product} = props;
+  const { product } = props;
   return (
-    <a key={product.__id} href={`/product/${product.__id}`} className="catalog-card">
+    <Link
+      key={product.__id}
+      to={`/product/${product.__id}`}
+      className="catalog-card"
+    >
       <div className="catalog-card-header">
-        <img src={product.image} alt={product.description} className="catalog-card-img" />
+        <img
+          src={product.image}
+          alt={product.description}
+          className="catalog-card-img"
+        />
       </div>
       <div className="catalog-card-body">
         <div className="catalog-card-title">{product.name}</div>
@@ -16,7 +25,7 @@ function ItemCard(props) {
           <div className="catalog-card-button">Buy</div>
         </div>
       </div>
-    </a>
+    </Link>
   );
 }
 

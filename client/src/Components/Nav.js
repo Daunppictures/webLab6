@@ -1,9 +1,12 @@
 import "../styles/App.css";
 import React from "react";
+import { useSelector } from "react-redux";
 import { NavLink } from "react-router-dom";
 import logo from "../images/BingLogo.svg";
 
 function Nav() {
+  const cart = useSelector((state) => state.cart);
+  const { cartItems } = cart;
   return (
     <div className="header">
       <div className="container container-between header-body">
@@ -42,6 +45,11 @@ function Nav() {
                   to="/cart"
                 >
                   Cart
+                  {cartItems.length > 0 && (
+                    <span className="badge">
+                      {cartItems.length}
+                    </span>
+                  )}
                 </NavLink>
               </li>
             </ul>
