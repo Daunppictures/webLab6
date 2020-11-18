@@ -6,3 +6,58 @@
 .catalog-load-wrapper {
   padding-top: 110px;
 }
+.catalog-filter-by-price {
+  width: 100px;
+  position: relative;
+  border: 1.5px solid #7e846b;
+  border-radius: 9px;
+  padding: 10px 0 10px 0;
+  background: #fff;
+  margin-top: 7px;
+}
+.catalog-filter-by-price::after {
+  content: "\25BC";
+  font-size: 12px;
+  pointer-events: none;
+  position: absolute;
+  right: 8px;
+  z-index: 3;
+  transform: translateY(25%);
+}
+.catalog-filter-list {
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  appearance: none;
+  border: none;
+  outline: none;
+  cursor: pointer;
+  color: #3d372c;
+  font-size: 14px;
+  overflow: hidden;
+  border-radius: 9px;
+  position: relative;
+  z-index: 1;
+  padding: 0 30px 0 20px;
+}
+.catalog-filter-text {
+  position: absolute;
+  top: 0;
+  left: 10px;
+  transform: translateY(-50%);
+  transition: all 0.3s ease-in-out;
+  pointer-events: none;
+  color: #7e846b;
+  font-size: 14px;
+  z-index: 2;
+  padding: 3px 6px;
+  background: #fff;
+  font-size: 16px;
+  border-radius: 5px;
+}
+.catalog-header {
+  width: 100%;
+  padding: 10px 15px;
+  background: rgb(245, 245, 245);
+  border-radius: 12px;
+  box-shadow: 0 6px 15px rgba(143, 102, 102, 0.1);
+}
