@@ -6,8 +6,8 @@ function ItemCard(props) {
   const { product } = props;
   return (
     <Link
-      key={product.__id}
-      to={`/product/${product.__id}`}
+      key={product._id}
+      to={`/product/${product._id}`}
       className="catalog-card"
     >
       <div className="catalog-card-header">

@@ -45,7 +45,7 @@ function Catalog() {
           </div>
           <div className="catalog-card-wrapper">
             {products.map((info) => {
-              return <ItemCard key={info.__id} product={info} />;
+              return <ItemCard key={info._id} product={info} />;
             })}
           </div>
         </div>

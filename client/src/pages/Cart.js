@@ -32,8 +32,8 @@ function Cart(props) {
         <MessageBox>Cart is empty.</MessageBox>
       ) : (
         <ul className="cart-items-list">
-          {cartItems.map((item) => (
-            <div key={item.product} className="cart-item">
+          {cartItems.map((item, index) => (
+            <div key={index} className="cart-item">
               <img src={item.image} alt={item.name} className="cart-img" />
 
               <div className="cart-item-name">
