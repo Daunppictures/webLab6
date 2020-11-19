@@ -3,7 +3,7 @@ import React, { useEffect } from "react";
 import ItemCard from "../Components/ItemCard";
 import { useDispatch, useSelector } from "react-redux";
 import { listProducts } from "../actions/productAction";
-import {filterByPrice} from "../actions/catalogActions";
+import { filterByPrice } from "../actions/catalogActions";
 import LoadingBox from "../Components/LoadingBox";
 import MessageBox from "../Components/MessageBox";
 import LoadingRectangle from "../Components/LoadingRectangle";
@@ -13,11 +13,9 @@ function Catalog() {
   const productList = useSelector((state) => state.productList);
   const { loading, error, products } = productList;
 
-
   useEffect(() => {
     dispatch(listProducts());
   }, [dispatch]);
-
 
   return (
     <div>
@@ -25,7 +23,7 @@ function Catalog() {
         <div className="container catalog-load-wrapper">
           <LoadingRectangle height="100px" width="100%" />
           <div className="catalog-load">
-            {[...Array(6)].map((x, i) => (
+            {[...Array(12)].map((x, i) => (
               <LoadingBox className="catalog-load" key={i} />
             ))}
           </div>
@@ -38,8 +36,12 @@ function Catalog() {
             <div className="catalog-filter-by-price">
               <span className="catalog-filter-text">Filter</span>
               <select className="catalog-filter-list">
-                <option value="asc" className="catalog-filter-item">ASC</option>
-                <option value="desc" className="catalog-filter-item">DESC</option>
+                <option value="asc" className="catalog-filter-item">
+                  ASC
+                </option>
+                <option value="desc" className="catalog-filter-item">
+                  DESC
+                </option>
               </select>
             </div>
           </div>
@@ -47,6 +49,9 @@ function Catalog() {
             {products.map((info) => {
               return <ItemCard key={info._id} product={info} />;
             })}
+            {/* {[...Array(products.length)].map((x, i) => (
+              console.log('test')
+            ))} */}
           </div>
         </div>
       )}

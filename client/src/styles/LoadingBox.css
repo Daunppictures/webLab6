@@ -13,10 +13,8 @@
 .home-loading-item-card {
   margin-top: 50px;
   width: 100%;
-  display: flex;
-  flex-direction: row;
-  justify-content: space-between;
-  align-items: center;
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
 }
 .loading-item-header {
   width: 250px;

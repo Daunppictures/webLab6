@@ -1,5 +1,5 @@
 import "../styles/App.css";
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import ItemCardHome from "../Components/ItemCardHome";
 import LoadingBox from "../Components/LoadingBox";
 import MessageBox from "../Components/MessageBox";
@@ -10,6 +10,7 @@ function Home() {
   const dispatch = useDispatch();
   const productList = useSelector((state) => state.productList);
   const { loading, error, products } = productList;
+  const [viewMore, setViewMore] = useState(4);
 
   useEffect(() => {
     dispatch(listProducts());
@@ -39,19 +40,24 @@ function Home() {
       ) : error ? (
         <MessageBox variant="danger">{error}</MessageBox>
       ) : (
-        <div className="home-item-cards">
-          {products.slice(0, 4).map((info, index) => {
-            return (
-              <ItemCardHome
-                key={index}
-                id={info.__id}
-                name={info.name}
-                description={info.description}
-                price={info.price}
-                image={info.image}
-              />
-            );
-          })}
+        <div className="home-item-cards-wrapper">
+          <div className="home-item-cards">
+            {products.slice(0, viewMore).map((info, index) => {
+              return (
+                <ItemCardHome
+                  key={index}
+                  id={info.__id}
+                  name={info.name}
+                  description={info.description}
+                  price={info.price}
+                  image={info.image}
+                />
+              );
+            })}
+          </div>
+          <div className="home-item-cards-footer">
+            <button onClick={() => setViewMore(viewMore => viewMore + 8)} className="home-more-btn">View More</button>
+          </div>
         </div>
       )}
     </div>
