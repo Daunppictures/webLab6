@@ -71,4 +71,10 @@
   font-size: 16px;
   font-weight: 500;
   cursor: pointer;
+  transition: all 0.1s ease-in-out;
+}
+.home-more-btn:hover {
+  background: #da324b;
+  transform: scale(1.01);
+  transition: all 0.1s ease-in-out;
 }

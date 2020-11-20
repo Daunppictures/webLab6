@@ -56,7 +56,8 @@ function Home() {
             })}
           </div>
           <div className="home-item-cards-footer">
-            <button onClick={() => setViewMore(viewMore => viewMore + 8)} className="home-more-btn">View More</button>
+            { viewMore <= 8 ? <button onClick={() => setViewMore(viewMore => viewMore + 4)} className="home-more-btn">View More</button> : ''}
+            
           </div>
         </div>
       )}

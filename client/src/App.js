@@ -7,6 +7,7 @@ import Catalog from "./pages/Catalog";
 import Footer from "./Components/Footer";
 import Product from "./pages/Product";
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
+import Signin from "./pages/Signin";
 
 function App() {
   return (
@@ -19,6 +20,7 @@ function App() {
           <Route path="/cart/:id" component={Cart} />
           <Route path="/cart" component={Cart} />
           <Route path="/catalog" component={Catalog} />
+          <Route path='/signin' component={Signin}/>
         </Switch>
         <Footer />
       </Router>

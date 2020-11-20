@@ -9,6 +9,7 @@
 @import "./Product.css";
 @import "./LoadingRectangle.css";
 @import "./Cart.css";
+@import "./Signin.css";
 
 body {
   font-family: 'Roboto', sans-serif;

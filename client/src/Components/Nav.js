@@ -55,7 +55,7 @@ function Nav() {
             </ul>
           </nav>
           <div className="header-buttons">
-            <button className="button-sign-in">Sign In</button>
+            <NavLink to='/signin' className="button-sign-in">Sign In</NavLink>
             <button className="button-sign-up">Sign Up</button>
           </div>
         </div>
