@@ -12,54 +12,62 @@
 @import "./Signin.css";
 
 body {
-  font-family: 'Roboto', sans-serif;
+  font-family: "Roboto", sans-serif;
   margin: 0;
   color: #3a3a3a;
 }
+.App {
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
 
 .container-between {
-	display: flex;
-	flex-direction: row;
-	justify-content: space-between;
-	align-items: center;
-	height: 100%;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  height: 100%;
 }
 
 .container {
 	max-width: 1140px;
-	margin: 0 auto;
+	width: 100%;
+  margin: 0 auto;
 }
 
 .home-item-cards {
   margin-top: 50px;
 }
 
-
-.Home, .Cart, .Catalog {
+.Home,
+.Cart,
+.Catalog {
   margin-top: 110px;
 }
 
 /* Alert */
 .succes {
-	color: #20a020;
+  color: #20a020;
 }
 .error {
-	color: #a02020;
+  color: #a02020;
 }
 .alert {
-	padding: 1rem;
-	border: .1rem solid transparent;
-	border: .5rem
+  padding: 1rem;
+  border: 0.1rem solid transparent;
+  border: 0.5rem;
 }
 .alert-info {
-	color: #2020a0;
-	background: #d2eef3;
-	border-radius: 10px;
-	margin: 30px 0 100px 0;
+  color: #2020a0;
+  background: #d2eef3;
+  border-radius: 10px;
+  margin: 30px 0 100px 0;
 }
 .alert-danger {
-	color: #a02020;
-	background: #ffe0e0e0;
-	border-radius: 10px;
-	margin: 30px 0 100px 0;
+  color: #a02020;
+  background: #ffe0e0e0;
+  border-radius: 10px;
+  margin: 30px 0 100px 0;
 }

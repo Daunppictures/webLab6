@@ -7,16 +7,21 @@ import logo from "../images/BingLogo.svg";
 function Nav() {
   const cart = useSelector((state) => state.cart);
   const { cartItems } = cart;
+
+  const burgerFunc = () => {
+    const menu = document.getElementById("menu");
+
+    menu.classList.toggle("active-menu");
+  };
+
   return (
     <div className="header">
       <div className="container container-between header-body">
         <NavLink exact to="/" className="header-logo">
           <img src={logo} alt="logo" className="header-img" />
         </NavLink>
-        <div className="header-burger">
-          <span></span>
-        </div>
-        <div className="menu-wrapper active">
+
+        <div id="menu" className="menu-wrapper active">
           <nav className="header-nav">
             <ul>
               <li className="header-nav-item">
@@ -46,18 +51,23 @@ function Nav() {
                 >
                   Cart
                   {cartItems.length > 0 && (
-                    <span className="badge">
-                      {cartItems.length}
-                    </span>
+                    <span className="badge">{cartItems.length}</span>
                   )}
                 </NavLink>
               </li>
             </ul>
           </nav>
           <div className="header-buttons">
-            <NavLink to='/signin' className="button-sign-in">Sign In</NavLink>
+            <NavLink to="/signin" className="button-sign-in">
+              Sign In
+            </NavLink>
             <button className="button-sign-up">Sign Up</button>
           </div>
+        </div>
+        <div onClick={burgerFunc} id="burger" className="header-burger">
+          <div className="line1"></div>
+          <div className="line1"></div>
+          <div className="line1"></div>
         </div>
       </div>
     </div>

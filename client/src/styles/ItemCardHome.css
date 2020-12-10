@@ -5,7 +5,7 @@
   border-radius: 10px;
   display: flex;
   flex-direction: column;
-  margin-top: 50px;
+  margin: 0 auto 20px;
 }
 .item-card-header {
   width: 100%;
