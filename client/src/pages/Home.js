@@ -46,11 +46,7 @@ function Home() {
               return (
                 <ItemCardHome
                   key={index}
-                  id={info.__id}
-                  name={info.name}
-                  description={info.description}
-                  price={info.price}
-                  image={info.image}
+                  product={info}
                 />
               );
             })}

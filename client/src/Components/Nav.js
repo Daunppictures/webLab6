@@ -38,7 +38,7 @@ function Nav() {
                 <NavLink
                   activeClassName="nav-active"
                   className="link"
-                  to="/catalog"
+                  to="/catalog?model=All&price=All"
                 >
                   Catalog
                 </NavLink>

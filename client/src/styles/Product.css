@@ -89,6 +89,7 @@
   justify-content: center;
   align-items: center;
   transition: all .2s ease-in-out;
+  border: none;
 }
 .product-link:hover {
   background: #dddddd;

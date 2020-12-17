@@ -5,6 +5,7 @@ import {
   productDetailsReducer,
   productListReducer,
 } from "./reducers/productReducers";
+import { filteredListReducer } from "./reducers/catalogReducers";
 
 const initialState = {
   cart: {
@@ -16,6 +17,8 @@ const initialState = {
 
 const reducer = combineReducers({
   productList: productListReducer,
+  filteredList: filteredListReducer,
+  
   productDetails: productDetailsReducer,
   cart: cartReducer,
 });

@@ -14,6 +14,53 @@ productRouter.get(
 );
 
 productRouter.get(
+  "/catalog/",
+  expressAsyncHandler(async (req, res) => {
+    if (req.query.model === "All" || req.query.price === "All") {
+      if (req.query.model === "All" && req.query.price === "All") {
+        // SHOW ALL PRODUCTS
+        const product = await Product.find({});
+
+        if (product) {
+          res.send(product);
+        } else {
+          res.status(404).send({ message: "Product Not Found" });
+        }
+      } else if (req.query.model === "All") {
+        // SHOW ALL MODELS AND FILTERED BY PRICE
+        const product = await Product.find({}).find({ price: req.query.price });
+
+        if (product) {
+          res.send(product);
+        } else {
+          res.status(404).send({ message: "Product Not Found" });
+        }
+      } else {
+        // SHOW ALL PRICE AND FILTERED BY MODEL
+        const product = await Product.find({ name: req.query.model }).find({});
+
+        if (product) {
+          res.send(product);
+        } else {
+          res.status(404).send({ message: "Product Not Found" });
+        }
+      }
+    } else {
+      // SHOW FILTERED BY PRICE AND FILTERED BY MODEL
+      const product = await Product.find({ name: req.query.model }).find({
+        price: req.query.price,
+      });
+
+      if (product) {
+        res.send(product);
+      } else {
+        res.status(404).send({ message: "Product Not Found" });
+      }
+    }
+  })
+);
+
+productRouter.get(
   "/seed",
   expressAsyncHandler(async (req, res) => {
     await Product.remove({});

@@ -1,11 +1,14 @@
 .catalog-load {
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+  padding: 0 20px 0 20px;
+}
+.catalog-load-card {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
   padding: 10px 20px 0 20px;
 }
-.catalog-load-wrapper {
-  padding-top: 110px;
-}
+
 .catalog-filter-by-price {
   width: 130px;
   position: relative;

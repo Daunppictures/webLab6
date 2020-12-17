@@ -1,13 +1,14 @@
 import "../styles/App.css";
 import { useDispatch, useSelector } from "react-redux";
 import React, { useEffect, useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, useHistory } from "react-router-dom";
 import arrow from "../images/icons/arrow-left.svg";
 import LoadingRectangle from "../Components/LoadingRectangle";
 import MessageBox from "../Components/MessageBox";
 import { detailsProduct } from "../actions/productAction";
 
 function Product(props) {
+  const history = useHistory();
   const dispatch = useDispatch();
   const productId = props.match.params.id;
   const [qty, setQty] = useState(1);
@@ -20,6 +21,10 @@ function Product(props) {
   const addToCartHandler = () => {
     props.history.push(`/cart/${productId}?qty=${qty}`);
   };
+
+  // function backHandler() {
+  //   window.history.back();
+  // }
   return (
     <div className="product-wrapper">
       {loading ? (
@@ -31,9 +36,12 @@ function Product(props) {
         <MessageBox variant="danger">{error}</MessageBox>
       ) : (
         <div className="product container">
-          <Link className="product-link" to="/catalog">
+          
+          <button className="product-link" onClick={() => {
+            history.goBack();
+          }}>
             <img src={arrow} alt="arrow" />
-          </Link>
+          </button>
           <div className="product-card">
             <div className="product-header">
               <img

@@ -7,12 +7,13 @@ import Catalog from "./pages/Catalog";
 import Footer from "./Components/Footer";
 import Product from "./pages/Product";
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
+
 import Signin from "./pages/Signin";
 
 function App() {
   return (
     <div className="App">
-      <Router>
+      <Router >
         <Nav />
         <Switch>
           <Route path="/" exact component={Home} />

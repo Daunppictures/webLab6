@@ -15,6 +15,8 @@ mongoose.connect("mongodb://localhost/bing", {
   useCreateIndex: true,
 });
 
+
+
 app.use("/api/users", userRouter);
 app.use("/api/products", productRouter);
 
