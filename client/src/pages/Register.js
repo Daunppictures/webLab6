@@ -1,25 +1,37 @@
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { Link } from "react-router-dom";
-import { signin } from "../actions/userActions";
+import { register } from "../actions/userActions";
 import MessageBox from "../Components/MessageBox";
 
-export default function Signin(props) {
+export default function Register(props) {
+  const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const [confirmPassword, setConfirmPassword] = useState("");
+  const [passwordLength, setPasswordLength] = useState(false);
 
   const redirect = props.location.search
     ? props.location.search.split("=")[1]
     : "/";
 
-  const userSignin = useSelector((state) => state.userSignin);
+  const userSignin = useSelector((state) => state.userRegister);
   const { userInfo, loading, error } = userSignin;
 
   const dispatch = useDispatch();
 
   const submitHandler = (e) => {
     e.preventDefault();
-    dispatch(signin(email, password));
+    if (password !== confirmPassword) {
+      alert("Password and confirm password are not match");
+    } else {
+      if(password.length >= 5) {
+        dispatch(register(name, email, password));
+      } else {
+        setPasswordLength(true);
+      }
+      
+    }
   };
   useEffect(() => {
     if (userInfo) {
@@ -31,9 +43,23 @@ export default function Signin(props) {
     <div className="signin container">
       <div className="signin-wrapper">
         <form className="signin-form" onSubmit={submitHandler}>
-          <h1>Sign In</h1>
+          <h1>Register</h1>
+          {passwordLength && <MessageBox variant="danger">Password is too short</MessageBox>}
           {loading && <MessageBox variant="succes">Please, wait</MessageBox>}
-          {error && <MessageBox variant='danger'>{error}</MessageBox>}
+          {error && <MessageBox variant="danger">{error}</MessageBox>}
+
+          <div className="signin-input-wrapper">
+            <input
+              className="signin-input"
+              type="text"
+              id="name"
+              required
+              onChange={(e) => setName(e.target.value)}
+            />
+            <label className="signin-label" htmlFor="name">
+              Name
+            </label>
+          </div>
 
           <div className="signin-input-wrapper">
             <input
@@ -55,24 +81,32 @@ export default function Signin(props) {
               required
               onChange={(e) => setPassword(e.target.value)}
             />
-            <label
-              className="signin-label"
-              className="signin-label"
-              htmlFor="password"
-            >
+            <label className="signin-label" htmlFor="password">
               Password
+            </label>
+          </div>
+          <div className="signin-input-wrapper">
+            <input
+              className="signin-input"
+              type="password"
+              id="confirmPassword"
+              required
+              onChange={(e) => setConfirmPassword(e.target.value)}
+            />
+            <label className="signin-label" htmlFor="confirmPassword">
+              Confirm Password
             </label>
           </div>
           <div className="signin-button-wrapper">
             <label />
             <button className="signin-button" type="submit">
-              Sign In
+              Register
             </button>
           </div>
           <div>
             <label />
             <div className="signin-reg-text">
-              New customer? <Link to={`/register?redirect=${redirect}`}>Create your account</Link>
+              Already have an account? <Link to={`/signin?redirect=${redirect}`}>Sign-In</Link>
             </div>
           </div>
         </form>

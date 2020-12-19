@@ -9,6 +9,7 @@ import Product from "./pages/Product";
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 
 import Signin from "./pages/Signin";
+import Register from "./pages/Register";
 
 function App() {
   return (
@@ -22,6 +23,7 @@ function App() {
           <Route path="/cart" component={Cart} />
           <Route path="/catalog" component={Catalog} />
           <Route path='/signin' component={Signin}/>
+          <Route path='/register' component={Register}/>
         </Switch>
         <Footer />
       </Router>
