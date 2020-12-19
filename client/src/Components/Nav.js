@@ -1,18 +1,24 @@
 import "../styles/App.css";
 import React from "react";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { NavLink } from "react-router-dom";
 import logo from "../images/BingLogo.svg";
+import { signout } from "../actions/userActions";
 
 function Nav() {
   const cart = useSelector((state) => state.cart);
   const { cartItems } = cart;
+  const userSignin = useSelector((state) => state.userSignin);
+  const { userInfo } = userSignin;
+  const dispatch = useDispatch();
 
   const burgerFunc = () => {
     const menu = document.getElementById("menu");
-
     menu.classList.toggle("active-menu");
   };
+  const signoutHandler = () => {
+    dispatch(signout());
+  }
 
   return (
     <div className="header">
@@ -58,10 +64,20 @@ function Nav() {
             </ul>
           </nav>
           <div className="header-buttons">
-            <NavLink to="/signin" className="button-sign-in">
-              Sign In
-            </NavLink>
-            <button className="button-sign-up">Sign Up</button>
+            {userInfo ? (
+              <div className="dropdown">
+                <NavLink className="button-sign-in" to="#">
+                  {userInfo.name} <i className="arrow"></i>
+                </NavLink>
+                <ul className="dropdown-content">
+                  <NavLink to='#signout' onClick={signoutHandler}>Sign Out</NavLink>
+                </ul>
+              </div>
+            ) : (
+              <NavLink to="/signin" className="button-sign-in">
+                Sign In
+              </NavLink>
+            )}
           </div>
         </div>
         <div onClick={burgerFunc} id="burger" className="header-burger">
