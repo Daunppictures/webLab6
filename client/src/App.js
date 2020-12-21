@@ -10,6 +10,8 @@ import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 
 import Signin from "./pages/Signin";
 import Register from "./pages/Register";
+import ShippingAddress from "./pages/ShippingAddress";
+import Success from "./pages/Success";
 
 function App() {
   return (
@@ -24,6 +26,8 @@ function App() {
           <Route path="/catalog" component={Catalog} />
           <Route path='/signin' component={Signin}/>
           <Route path='/register' component={Register}/>
+          <Route path='/shipping' component={ShippingAddress}/>
+          <Route path='/success' component={Success}/>
         </Switch>
         <Footer />
       </Router>

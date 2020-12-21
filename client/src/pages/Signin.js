@@ -33,7 +33,7 @@ export default function Signin(props) {
         <form className="signin-form" onSubmit={submitHandler}>
           <h1>Sign In</h1>
           {loading && <MessageBox variant="succes">Please, wait</MessageBox>}
-          {error && <MessageBox variant='danger'>{error}</MessageBox>}
+          {error && <MessageBox variant="danger">{error}</MessageBox>}
 
           <div className="signin-input-wrapper">
             <input
@@ -55,11 +55,7 @@ export default function Signin(props) {
               required
               onChange={(e) => setPassword(e.target.value)}
             />
-            <label
-              className="signin-label"
-              className="signin-label"
-              htmlFor="password"
-            >
+            <label className="signin-label" htmlFor="password">
               Password
             </label>
           </div>
@@ -72,7 +68,10 @@ export default function Signin(props) {
           <div>
             <label />
             <div className="signin-reg-text">
-              New customer? <Link to={`/register?redirect=${redirect}`}>Create your account</Link>
+              New customer?{" "}
+              <Link to={`/register?redirect=${redirect}`}>
+                Create your account
+              </Link>
             </div>
           </div>
         </form>
