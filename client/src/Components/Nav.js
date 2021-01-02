@@ -18,7 +18,7 @@ function Nav() {
   };
   const signoutHandler = () => {
     dispatch(signout());
-  }
+  };
 
   return (
     <div className="header">
@@ -70,13 +70,28 @@ function Nav() {
                   {userInfo.name} <i className="arrow"></i>
                 </NavLink>
                 <ul className="dropdown-content">
-                  <NavLink to='#signout' onClick={signoutHandler}>Sign Out</NavLink>
+                  <NavLink to="#signout" onClick={signoutHandler}>
+                    Sign Out
+                  </NavLink>
                 </ul>
               </div>
             ) : (
               <NavLink to="/signin" className="button-sign-in">
                 Sign In
               </NavLink>
+            )}
+
+            {userInfo && userInfo.isAdmin && (
+              <div className="dropdown">
+                <NavLink className="button-sign-in" to="#admin">
+                  Admin <i className="arrow"></i>
+                </NavLink>
+                <ul className="dropdown-content">
+                  <NavLink to="/userList">
+                    Users
+                  </NavLink>
+                </ul>
+              </div>
             )}
           </div>
         </div>

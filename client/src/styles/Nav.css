@@ -117,7 +117,6 @@ a {
   background: #000;
 }
 
-
 .button-sign-up {
   background: none;
   border: 1px solid var(--header-button-color);
@@ -139,13 +138,13 @@ a {
   border-right: 5px solid transparent;
   border-top: 10px solid #7c7b7e;
   margin-left: 10px;
+  transition: all .1s ease-in-out;
 }
 
 /* Dropdown */
 .dropdown {
   display: inline-block;
   position: relative;
-  
 }
 .dropdown-content {
   position: absolute;
@@ -156,14 +155,16 @@ a {
   z-index: 1;
   background: #ececec;
   margin: 0;
-  
-  border-radius: .5rem;
+
+  border-radius: 0.5rem;
 }
 .dropdown:hover .dropdown-content {
   display: block;
-  
 }
-
+.dropdown:hover .arrow {
+  transform: rotate(180deg);
+  transition: all .1s ease-in-out;
+}
 
 :root {
   --main-color: #0b132a;

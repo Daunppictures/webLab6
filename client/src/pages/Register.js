@@ -1,115 +1,143 @@
-import React, { useEffect, useState } from "react";
+import { ErrorMessage, Field, Form, Formik } from "formik";
+import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { Link } from "react-router-dom";
 import { register } from "../actions/userActions";
 import MessageBox from "../Components/MessageBox";
+import * as Yup from "yup";
 
 export default function Register(props) {
-  const [name, setName] = useState("");
-  const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
-  const [confirmPassword, setConfirmPassword] = useState("");
-  const [passwordLength, setPasswordLength] = useState(false);
-
   const redirect = props.location.search
     ? props.location.search.split("=")[1]
     : "/";
-
   const userSignin = useSelector((state) => state.userRegister);
   const { userInfo, loading, error } = userSignin;
-
   const dispatch = useDispatch();
 
-  const submitHandler = (e) => {
-    e.preventDefault();
-    if (password !== confirmPassword) {
-      alert("Password and confirm password are not match");
-    } else {
-      if(password.length >= 5) {
-        dispatch(register(name, email, password));
-      } else {
-        setPasswordLength(true);
-      }
-      
-    }
-  };
   useEffect(() => {
     if (userInfo) {
       props.history.push(redirect);
     }
   }, [props.history, redirect, userInfo]);
 
+  const initialValues = {
+    name: "",
+    email: "",
+    password: "",
+    passwordConfirm: "",
+  };
+
+  const onSubmit = (values) => {
+    dispatch(register(values.name, values.email, values.password));
+  };
+
+  const validationSchema = Yup.object({
+    name: Yup.string().required("Required"),
+    email: Yup.string().email("Invalid email format").required("Required"),
+    password: Yup.string().required("Required"),
+    passwordConfirm: Yup.string().when("password", {
+      is: (val) => (val && val.length > 0 ? true : false),
+      then: Yup.string().oneOf(
+        [Yup.ref("password")],
+        "Both password need to be the same"
+      ),
+    }),
+  });
+
   return (
     <div className="signin container">
       <div className="signin-wrapper">
-        <form className="signin-form" onSubmit={submitHandler}>
-          <h1>Register</h1>
-          {passwordLength && <MessageBox variant="danger">Password is too short</MessageBox>}
-          {loading && <MessageBox variant="succes">Please, wait</MessageBox>}
-          {error && <MessageBox variant="danger">{error}</MessageBox>}
+        <Formik
+          initialValues={initialValues}
+          onSubmit={onSubmit}
+          validationSchema={validationSchema}
+        >
+          
+          <Form className="signin-form">
+            <h1>Register</h1>
 
-          <div className="signin-input-wrapper">
-            <input
-              className="signin-input"
-              type="text"
-              id="name"
-              required
-              onChange={(e) => setName(e.target.value)}
-            />
-            <label className="signin-label" htmlFor="name">
-              Name
-            </label>
-          </div>
+            {loading && <MessageBox variant="succes">Please, wait</MessageBox>}
+            {error && <MessageBox variant="danger">{error}</MessageBox>}
 
-          <div className="signin-input-wrapper">
-            <input
-              className="signin-input"
-              type="email"
-              id="email"
-              required
-              onChange={(e) => setEmail(e.target.value)}
-            />
-            <label className="signin-label" htmlFor="email">
-              Email address
-            </label>
-          </div>
-          <div className="signin-input-wrapper">
-            <input
-              className="signin-input"
-              type="password"
-              id="password"
-              required
-              onChange={(e) => setPassword(e.target.value)}
-            />
-            <label className="signin-label" htmlFor="password">
-              Password
-            </label>
-          </div>
-          <div className="signin-input-wrapper">
-            <input
-              className="signin-input"
-              type="password"
-              id="confirmPassword"
-              required
-              onChange={(e) => setConfirmPassword(e.target.value)}
-            />
-            <label className="signin-label" htmlFor="confirmPassword">
-              Confirm Password
-            </label>
-          </div>
-          <div className="signin-button-wrapper">
-            <label />
-            <button className="signin-button" type="submit">
-              Register
-            </button>
-          </div>
-          <div>
-            <label />
-            <div className="signin-reg-text">
-              Already have an account? <Link to={`/signin?redirect=${redirect}`}>Sign-In</Link>
+            <div className="signin-input-wrapper">
+              <Field
+                className="signin-input"
+                type="text"
+                id="name"
+                required
+                name="name"
+              />
+              <label className="signin-label" htmlFor="name">
+                Name
+              </label>
             </div>
-          </div>
-        </form>
+            <div className="form-msg">
+              <ErrorMessage className="form-msg" name="name" />
+            </div>
+
+            <div className="signin-input-wrapper">
+              <Field
+                className="signin-input"
+                type="email"
+                id="email"
+                required
+                name="email"
+              />
+              <label className="signin-label" htmlFor="email">
+                Email address
+              </label>
+            </div>
+            <div className="form-msg">
+              <ErrorMessage className="form-msg" name="email" />
+            </div>
+
+            <div className="signin-input-wrapper">
+              <Field
+                className="signin-input"
+                type="password"
+                id="password"
+                required
+                name="password"
+              />
+              <label className="signin-label" htmlFor="password">
+                Password
+              </label>
+            </div>
+            <div className="form-msg">
+              <ErrorMessage className="form-msg" name="password" />
+            </div>
+
+            <div className="signin-input-wrapper">
+              <Field
+                className="signin-input"
+                type="password"
+                id="passwordConfirm"
+                required
+                name="passwordConfirm"
+              />
+              <label className="signin-label" htmlFor="passwordConfirm">
+                Confirm Password
+              </label>
+            </div>
+            <div className="form-msg">
+              <ErrorMessage className="form-msg" name="passwordConfirm" />
+            </div>
+
+            <div className="signin-button-wrapper">
+              <label />
+              <button className="signin-button" type="submit">
+                Register
+              </button>
+            </div>
+            <div>
+              <label />
+              <div className="signin-reg-text">
+                Already have an account?{" "}
+                <Link to={`/signin?redirect=${redirect}`}>Sign-In</Link>
+              </div>
+            </div>
+          </Form>
+        </Formik>
       </div>
     </div>
   );
